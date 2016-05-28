@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<style></style>
+<body>
+    
+
+<script>
 var Promise = require('es6-promise').Promise,
     googlemaps = require('googlemaps'),
     polyline = require('polyline'),
@@ -5,11 +13,11 @@ var Promise = require('es6-promise').Promise,
     fs = require('fs'),
     util = require('util');
 
-var output = "devinstest1.geojson", // name of the output file
-    start = "Calgary",
-    end = "Edmonton",
+var output = "", // name of the output file
+    start = "",
+    end = "",
     // waypoints is a string with values separated by |
-    waypoints = "Red Deer";
+    waypoints = "";
 
 var apiKey = fs.readFile('config-gmaps', function(err, data){
   if (err) {
@@ -18,7 +26,7 @@ var apiKey = fs.readFile('config-gmaps', function(err, data){
   return data;
 });
 
-googlemaps.config({'AIzaSyDCWQQNIQCNoLaQgQi6vphN4IIZIupoJ2M': apiKey});
+googlemaps.config({'key': apiKey});
 
 function getGoogleRouteInformation(origin, destination, waypoints) {
   return new Promise(function(resolve, reject){
@@ -90,3 +98,6 @@ getGoogleRouteInformation(start, end, waypoints)
 
 }, handleError)
 .catch(handleError);
+</script>
+</body>
+</html>
