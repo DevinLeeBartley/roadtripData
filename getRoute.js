@@ -18,22 +18,16 @@ Papa.parse(content, {
 
 
 function processData(data) {
+    
+    
     for (var d in data.data) {
+        
         var currentTrip = data.data[d];
-        //        console.log(currentTrip.TO);
-
-
-
-
-
-
-        //Now you need to load in these values from another file and loop through each time?
-        //Also - how do you add an attribute value for the comments section
 
         var name = currentTrip.TO + currentTrip.FROM + ".geojson";
         
         name2 = name.replace(/\s+/g, '');
-        console.log(name2);
+        console.log(name2); //this loop is working, going through all the TO and FROM locations. however there only ever is one file output 
 
         var output = name2, // name of the output file
             start = currentTrip.FROM
@@ -125,7 +119,7 @@ function processData(data) {
             // Write out the file
             .then(function (geoData) {
 
-                fs.writeFile('geojson/' + output, JSON.stringify(geoData, null, 2));
+                fs.writeFile('geojson/' + output, JSON.stringify(geoData, null, 2)); //why does this only create one file? It should loop through each trip.
 
                 console.log('Successfully created file ' + output)
 
