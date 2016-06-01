@@ -102,23 +102,24 @@ function processData(data) {
 //                    };
 //                    the lat/long values wont work for a linestring. Just needs to be an array of arrays
                     
-                    var value = [rawPoints[0], rawPoints[1]]
+                    var value = [rawPoints[0], rawPoints[1]];
                     
 
                     return normalized.push(value);
 
                 });
 //                console.log(normalized);
-                var normalized2 = { line: normalized};
-                console.log(normalized2);
-                return normalized;
+                var normalized2 = { line: normalized}
+//                console.log(normalized2);
+                return normalized2;
 
             }, handleError)
             // Encode the array into proper geoJSON
             .then(function (normalizedPoints) {
 //                Note, you need to just group the array of arrays above and then output as coordinates for a LineString
+            console.log(normalizedPoints)
                 var geoData = geojson.parse(normalizedPoints, {
-                    'LineString': 'line'
+                    'MultiLineString': 'line'
                 });
 
                 return geoData;
