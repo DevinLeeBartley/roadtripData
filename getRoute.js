@@ -1,141 +1,143 @@
-//set up the Papaparse (babyparse) require and set the file as my trips.csv data
-var Papa = require('babyparse')
-    , fs = require('fs')
-    , file = 'trips.csv'
-    , content = fs.readFileSync(file, {
-        encoding: 'binary'
-    })
-    , Promise = require('es6-promise').Promise
-    , googlemaps = require('googlemaps')
-    , polyline = require('polyline')
-    , geojson = require('geojson')
-    , util = require('util');
+var fs = require('fs')
+    , turf = require("turf")
+    , csv = require("fast-csv")
+    , gmaps = require('googlemaps'),
 
-//var apiKey = fs.readFile('config-gmaps', function (err, data) {
-//    if (err) {
-//        console.error(err);
-//    }
-//    return data;
-//});
+    polyline = require('polyline')
+    , Promise = require('es6-promise').Promise;
 
-googlemaps.config({
-    //    'AIzaSyDCWQQNIQCNoLaQgQi6vphN4IIZIupoJ2M': apiKey
+var publicConfig = {
     key: 'AIzaSyDCWQQNIQCNoLaQgQi6vphN4IIZIupoJ2M'
-});
+    , stagger_time: 1000
+    , encode_polylines: false
+    , secure: true
+, };
 
-function getGoogleRouteInformation(origin, destination, waypoints) {
-    return new Promise(function (resolve, reject) {
+gmaps.config(publicConfig);
 
-        if (!origin || !destination) {
-            console.error('Origin and destination required!')
-        }
+var dataIn = [];
 
-        function handleResponse(err, data) {
-            if (data.status == "OK") {
-                resolve(data);
-            } else {
-                reject('There was a problem getting the data from Google: ', err);
-            }
-        };
-
-        googlemaps.directions(origin, destination, handleResponse, false, false, waypoints);
+csv.fromPath('trips.csv', {
+        headers: true
+    })
+    .on('data', function (data) {
+        dataIn.push(data);
+    })
+    .on('end', function () {
+        processData(dataIn);
     });
+
+function processData(dataIn) {
+
+    var promises = [];
+
+    // map all the data and store as promise
+    dataIn.map(function (d) {
+
+        var promise = findRoute(d.TO, d.FROM, d.YEAR, d.COMMENT);
+
+        // push to array
+        promises.push(promise);
+
+        function f() {
+            console.log('Running 1 second Timeout');
+        }
+        setTimeout(f, 1000);
+
+
+
+    });
+
+    // when all the promises are ready
+    Promise.all(promises).then(function (features) {
+
+        function f() {
+            console.log('Running 1 second Timeout');
+        }
+        setTimeout(f, 1000);
+
+
+        //write all the polylines to a feature collection
+        var fc = turf.featureCollection(features);
+
+        // write the featurecollection to file
+        fs.writeFile('geojson/routes.json', JSON.stringify(fc));
+
+    }).catch(function (err) {
+        console.log(err);
+    })
 }
 
-function handleError(err) {
-    console.error(err);
-};
-
-
-Papa.parse(content, {
-    download: true
-    , header: true
-    , complete: function (data) {
-
-        processData(data);
+function findRoute(origin, destination, year, comment) {
+    function f() {
+        console.log('Running 1 second Timeout');
     }
-});
-
-function processData(data) {
+    setTimeout(f, 1000);
 
 
-    for (var d in data.data) {
 
-        var currentTrip = data.data[d];
+    return new Promise(function (resolve, reject) {
 
-        var name = currentTrip.TO + currentTrip.FROM + ".geojson";
+        function f() {
+            console.log('Running 1 second Timeout');
+        }
+        setTimeout(f, 1000);
 
-
-        var output = name.replace(/\s+/g, ''), // name of the output file
-            start = currentTrip.FROM
-            , end = currentTrip.TO
-            , comments = currentTrip.COMMENTS
-            , waypoints = "";
-
-        findRoute(output, start, end, comments, waypoints)
-        break;
-    }
-
-    function findRoute(output, start, end, comments, waypoints) {
-
-        getGoogleRouteInformation(start, end, waypoints)
-            // Decode the polyline info from Google
-            .then(function (data) {
-
-                var encodedPolyline = data.routes[0].overview_polyline
-                    , decodedPolyline;
-
-                decodedPolyline = polyline.decode(encodedPolyline.points);
-            
-                return decodedPolyline;
-            }, handleError)
-            // Convert the array of arrays into an array of objects
-            .then(function (points) {
-
-                var normalized = [];
-
-                points.forEach(function (rawPoints) {
-
-//                    var value = {
-//                        'lat': rawPoints[0]
-//                        , 'lng': rawPoints[1]
-//                    };
-//                    the lat/long values wont work for a linestring. Just needs to be an array of arrays
-                    
-                    var value = [rawPoints[0], rawPoints[1]];
-                    
-
-                    return normalized.push(value);
-
-                });
-//                console.log(normalized);
-                var normalized2 = { line: normalized}
-//                console.log(normalized2);
-                return normalized2;
-
-            }, handleError)
-            // Encode the array into proper geoJSON
-            .then(function (normalizedPoints) {
-//                Note, you need to just group the array of arrays above and then output as coordinates for a LineString
-            console.log(normalizedPoints)
-                var geoData = geojson.parse(normalizedPoints, {
-                    'MultiLineString': 'line'
-                });
-
-                return geoData;
+        gmaps.directions(origin, destination, function (err, data) {
+            if (err) throw err;
 
 
-            }, handleError)
-            // Write out the file
-            .then(function (geoData) {
+            // decode the cryptic google result
+
+            function f() {
+                console.log('Running 1 second Timeout');
+            }
+            setTimeout(f, 1000);
+
+            var points = polyline.decode(data.routes[0].overview_polyline.points);
+
+            // need to swap lng and lat positions for GeoJSON
+            var pointsCoordsReversed = [];
+
+            points.forEach(function (coords) {
+                pointsCoordsReversed.push([coords[1], coords[0]]);
+            })
+
+            // shortcut for leg info
+            var legs = data.routes[0].legs[0];
+
+            // add starting point
+            pointsCoordsReversed.unshift([legs.start_location.lng
 
 
-                fs.writeFile('geojson/' + output, JSON.stringify(geoData, null, 2));
-                //why does this only create one file? It should loop through each trip.
 
-                console.log('Successfully created file ' + output)
 
-            }, handleError)
-            .catch(handleError);
-    }
+
+
+
+
+                
+                , legs.start_location.lat]);
+
+            // add ending point
+            pointsCoordsReversed.push([legs.end_location.lng, legs.end_location.lat]);
+
+            // create a linestring and add properties
+            var line = turf.lineString(pointsCoordsReversed, {
+                start: legs.start_address
+                , end: legs.end_address
+                , year: year
+                , comment: comment
+            });
+
+            if (line) {
+                resolve(line)
+            } else {
+                reject(Error("pooched"));
+            }
+
+        }); // end gmaps.directions
+
+    }); // end promise
+
 }

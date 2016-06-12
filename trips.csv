@@ -1,6 +1,6 @@
 FROM,TO,YEAR,COMMENT
-Longmont CO,Memphis TN,1999,My family took a summer road trip to florida to visit friends in Ft Lauderdale and to go to Disney Land
-Memphis TN,Ft Lauderdale FL,1999,My family took a summer road trip to florida to visit friends in Ft Lauderdale and to go to Disney Land
+Longmont CO,St Louis MO,1999,My family took a summer road trip to florida to visit friends in Ft Lauderdale.
+St Louis MO,Ft Lauderdale FL,1999,My family took a summer road trip to florida to visit friends in Ft Lauderdale.
 Ft Lauderdale FL,Cape Canaveral,1999,One of the side trips on our Florida trip included watching a rocket take off in Cape Canaveral
 Denver CO,Los Angeles CA,2000,Family road trip to California to attend a cousins wedding
 Los Angeles CA,Orange CA,2000,We took a side trip to Orange California to visit the famous Vans skatepark
@@ -25,7 +25,7 @@ Tofino BC,Cortez Island BC,2013,On our camping trip we visited our friend Whitne
 Edmonton AB,Dawson City YT,2012,Drove to Dawson City YT to visit friend Whitney in my station wagon. On the way home picked up a french canadian hitchiker and gave him a 3 day ride back to Edmonton. Everytime we stopped for the night I slept in my car and he slept in his tent off the side of the highway.
 Williams Lake BC,Bella Coola BC,2008,While living in Williams Lake I drove out to Bella Coola to go hiking with my friend Daniel
 Williams Lake BC,Smithers BC,2008,My friend Nik and met in Prince George made cow-heart beef jerky in Burns Lake and then went to a folk music festival in Smithers
-Williams Lake BC,Barkersville BC,2008,In 2008 my parents visited me in Williams Lake. We camped in the Barkersville area for the weekend.
+Williams Lake BC,Barkersville BC,2008,In 2008 my parents visited me in Williams Lake where I was working. We camped in the Barkersville area for the weekend.
 Edmonton AB,Q'appelle SK,2014,Paragon had me drive an F250 truck from Edmonton to a pipeline job in Toronto. It was my first trans canadian journey.
 Q'appelle SK,Winnipeg MB,2014,Paragon had me drive an F250 truck from Edmonton to a pipeline job in Toronto. It was my first trans canadian journey.
 Winnipeg MB,Wawa ON,2014,Paragon had me drive an F250 truck from Edmonton to a pipeline job in Toronto. It was my first trans canadian journey.
@@ -47,3 +47,23 @@ Hope AK,Seward AK,2011,While visiting my relatives in Hope I was loaned a car an
 Puerto Vallarta Mexico,Sayulita Mexico,2010,In the winter of 2010 I flew to Puerto Vallarta Mexico and camped on the beach in Sayulita for a week.
 Sayulita Mexico,Guadalajara Mexico,2010,I took a bus to guadalajara mexico and stayed in a youth hostel there.
 Guadalajara Mexico,Aguas Calientes Mexico,2010,I spent a week in Aguas Calientes Mexico and made some great friends there. They even held a bbq for me in an abandoned house when I left.
+Edmonton AB,Fort McKay AB,2013,I used to have to drive up to Fort Mcmurray for work to do soil survey in the boreal forest. I also was lucky enough to work on a fly in/fly out job at an ice road construction project.
+Edmonton AB,Prince Albert SK,2015,My friend Alex and I drove to Prince Albert National 
+Miami FL,Key West FL,1997,My 3rd grade class trip in Florida was at a marine biology camp on Big Pine Key FL. We also spent a day in Key West FL
+Buenos Aires Argentina,Parana Argentina,2004,In 2004 I was luck enough to go on an exchange program in Parana Argentina. I attended a catholic boys school and stayed with a host family.
+Parana Argentina,Corrientes Argentina,2004,I travelled with my Argentinean host brother by bus to the city of Corrientes Argentina to visit his relatives for a week.
+Corrientes Argentina,Iguazu Falls Argentina,2004,While in Correintes Argentina with my host brother we took a trip to visit the famous Iguazu falls on the border with Brazil.
+La Paz Bolivia,Copacabana Bolivia,2004,"My brother and I flew to La Paz bolivia, and took a bus to the Isla Del Sol on Lake Titicaca and visited the ruins of Tiwanaku"
+Copacabana Bolivia,Tiwanaku Bolivia,2004,"My brother and I flew to La Paz bolivia, and took a bus to the Isla Del Sol on Lake Titicaca and visited the ruins of Tiwanaku"
+Nelson BC,Revelstoke BC,2013,On the way back from Nelson to Edmonton I visited Nakusp and the backcountry hot spring in the area. There is a nice ferry than runs across Arrow Lake to connect you to the town of Revelstoke.
+Moab UT,Butte MT,2016,"On a long roadtrip from Colorado to Edmonton, I visited the beautiful architecture of the once booming mining town of Butte"
+Butte MT,Sandpoint ID,2016,From Butte MT I drove to Sandpoint ID to visit a friend from University.
+Sandpoint ID,Canmore AB,2016,On a winter road trip back to Edmonton I drove north from Sandpoint ID to Canmore AB
+Butte MT,Great Falls MT,2015,On the way home from Butte MT I stopped to visit a friend in Helena MT.
+Calgary AB,Vancouver BC,2013,I drove from Edmonton to Vancouver via Calgary to visit friends.
+Woodstock NY,New York NY,2010,I took a bus from Woodstock NY to NYC to fly home to Denver.
+Denver CO,Tuscon AZ,1989,When I was very young I moved to Tuscon AZ because my dad had a job there.
+Los Angeles CA,Santa Barbara CA,2016,I took the Amtrack Pacific Surfliner train from Santa Barbara to downtown Los Angeles with my parents to spend a day walking around the city.
+Moab UT,Grand Canyon AZ,1998,My family took a road trip through Utah and to the Grand Canyon.
+Chicago IL,Evanston IL,2008,I visited a friend in Chicago in February. It was cold and windy.
+San Francisco CA,Salt Lake City UT,2000,As a child my family drove to San Francisco. Crossing the great Salt Flats in Utah was a memorable moment.
